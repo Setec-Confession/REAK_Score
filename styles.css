@@ -1,0 +1,263 @@
+/* -------------------------
+   1. Base Styles
+-------------------------- */
+:root {
+  font-family: Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 24px;
+  background: #f7f7fb;
+  color: #111;
+  max-width: 100%;       /* Prevent overflow */
+  overflow-x: hidden;    /* Disable horizontal scroll */
+}
+
+header h3 {
+  margin: 0 0 12px;
+}
+
+/* Accessibility helper */
+.sr-only {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px,1px,1px,1px);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
+/* -------------------------
+   2. Table Layout
+-------------------------- */
+.table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(16,24,40,.06);
+  margin-bottom: 12px;
+  max-width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 320px;   /* Smaller min-width for phones */
+}
+
+thead {
+  background: #0f172a;
+  color: #fff;
+}
+
+th, td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e6e9ef;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background: #f4f6fb;
+}
+
+/* Sticky table headers */
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* -------------------------
+   3. Form Layout
+-------------------------- */
+#add-score-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+#add-score-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+#add-score-form input,
+#add-score-form button {
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccd0da;
+}
+
+#add-score-form button {
+  background: #0f172a;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+}
+
+#add-score-form button:hover {
+  opacity: 0.95;
+}
+
+/* -------------------------
+   4. Responsive Styles
+-------------------------- */
+
+/* Tablet & Small Screens (≤768px) */
+@media (max-width: 768px) {
+  body { margin: 12px; }
+  table { font-size: 14px; }
+  th, td { padding: 8px 10px; }
+}
+
+/* Mobile Card Table (≤560px) */
+@media (max-width: 560px) {
+  .table-wrap { padding: 8px; }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    position: relative;
+    clip: auto;
+    height: auto;
+  }
+
+  tr {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(16,24,40,.04);
+  }
+
+  th { display: none; }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border-bottom: 0;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 8px;
+    color: #334155;
+  }
+}
+
+/* iPhone SE / Small Phones (≤375px) */
+@media (max-width: 375px) {
+  body {
+    margin: 5px;
+    font-size: 14px;
+  }
+
+  header h3 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  #add-score-form {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #add-score-form input,
+  #add-score-form button {
+    font-size: 14px;
+    padding: 6px;
+    width: 100%;
+  }
+
+  .table-wrap { padding: 6px; }
+
+  table {
+    min-width: 100%;
+    font-size: 13px;
+  }
+
+  tr {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  td {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+}
+
+/* Specific device viewport: 375×667 (e.g. iPhone 8 portrait)
+   This targets exact viewport dimensions and applies small adjustments
+   without overriding broader mobile rules. */
+@media (width: 375px) and (height: 667px) and (orientation: portrait) {
+  body {
+    margin: 6px;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  header h3 {
+    font-size: 17px;
+    text-align: center;
+  }
+
+  #add-score-form {
+    gap: 6px;
+  }
+
+  #add-score-form input,
+  #add-score-form button {
+    font-size: 15px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .table-wrap {
+    padding: 8px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 8px 10px;
+  }
+
+  tr {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Safe-area and iOS scrolling improvements for notched devices (iPhone X, etc.) */
+
+
+body {
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+}
+
+.table-wrap {
+  -webkit-overflow-scrolling: touch; /* smooth momentum scrolling on iOS */
+  padding-left: max(12px, env(safe-area-inset-left));
+  padding-right: max(12px, env(safe-area-inset-right));
+}
+
